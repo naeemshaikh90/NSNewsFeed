@@ -1,0 +1,29 @@
+PODS:
+  - AsyncDisplayKit (1.2.3):
+    - AsyncDisplayKit/ASDealloc2MainObject (= 1.2.3)
+  - AsyncDisplayKit/ASDealloc2MainObject (1.2.3)
+  - LoremIpsum (1.0.0)
+  - MBProgressHUD (0.9.1)
+  - pop (1.0.7)
+  - SDWebImage (3.7.3):
+    - SDWebImage/Core (= 3.7.3)
+  - SDWebImage/Core (3.7.3)
+  - TTTAttributedLabel (1.13.4)
+
+DEPENDENCIES:
+  - AsyncDisplayKit
+  - LoremIpsum (~> 1.0)
+  - MBProgressHUD (~> 0.9.1)
+  - pop (~> 1.0)
+  - SDWebImage (~> 3.7)
+  - TTTAttributedLabel
+
+SPEC CHECKSUMS:
+  AsyncDisplayKit: 5c8f38225f7478e39c48196cec0dd0d2ac3455ed
+  LoremIpsum: 9029c55d36501b2ee0b05cc9ecda11d3a0479160
+  MBProgressHUD: c47f2c166c126cf2ce36498d80f33e754d4e93ad
+  pop: 628ffc631644601567ee8bfaaaea493ebd7d0923
+  SDWebImage: 1d2b1a1efda1ade1b00b6f8498865f8ddedc8a84
+  TTTAttributedLabel: 0a2ac7b2dd726d32a070dafb01446026b11e624f
+
+COCOAPODS: 0.38.2
