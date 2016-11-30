@@ -2,8 +2,8 @@
 //  NewsFeedViewController.swift
 //  NSNewsFeed
 //
-//  Created by Spaculus MM on 24/08/15.
-//  Copyright (c) 2015 Spaculus MM. All rights reserved.
+//  Created by Naeem Shaikh on 24/08/15.
+//  Copyright (c) 2015 Naeem Shaikh. All rights reserved.
 //
 
 import UIKit
@@ -17,7 +17,7 @@ class NewsFeedVC: UIViewController ,UITableViewDataSource ,UITableViewDelegate,M
     @IBOutlet var tblView: UITableView!
     let cellIdentifier = "cellIdentifier"
     let cellIdentifierTextAndImage = "TextAndImageCell"
-    var aryTableData = []
+    var aryTableData = [String]()
     var pageTitle:String = ""
     var tableHeaderTitle = ""
     var tableFooterTitle = ""
@@ -36,7 +36,7 @@ class NewsFeedVC: UIViewController ,UITableViewDataSource ,UITableViewDelegate,M
         if(CommonUtil.connected()) {
             self.webService()
         } else {
-            CommonUtil.ShowALert(AlertTitle, myMessage: ERROR_NO_INTERNET_CONNECTION)
+            CommonUtil.ShowALert(myTitle: AlertTitle, myMessage: ERROR_NO_INTERNET_CONNECTION)
         }
         
         //self.searchItunesFor("Facebook")
@@ -71,10 +71,12 @@ class NewsFeedVC: UIViewController ,UITableViewDataSource ,UITableViewDelegate,M
             print("Task Completed")
             MBProgressHUD.hide(for: self.view, animated: true)
             if(error != nil) {
-                print(error!?.localizedDescription)
+                print(error!.localizedDescription)
             }
             let err:NSError?
+            
             if let jsonResult = JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.mutableContainers) as? NSDictionary {
+                
                 if(err != nil) {
                     print("JSON Error : \(err!.localizedDescription)")
                 }
@@ -84,7 +86,7 @@ class NewsFeedVC: UIViewController ,UITableViewDataSource ,UITableViewDelegate,M
                 if let resultFeed:NSDictionary = jsonResult["feed"] as? NSDictionary {
                     DispatchQueue.main.async(execute: {
                         MBProgressHUD.hide(for: self.view, animated: true)
-                        self.aryTableData = (resultFeed.object(forKey: "entry") as! NSArray) as! [Any]
+                        self.aryTableData = (resultFeed.object(forKey: "entry") as! NSArray) as! [Any] as! [String]
                         self.pageTitle = ((resultFeed.object(forKey: "author")! as AnyObject).object(forKey: "name") as AnyObject).object(forKey: "label") as! String
                         
                         self.tableHeaderTitle = (resultFeed.object(forKey: "title") as AnyObject).object(forKey: "label") as! String
@@ -98,14 +100,14 @@ class NewsFeedVC: UIViewController ,UITableViewDataSource ,UITableViewDelegate,M
         })
         task.resume()
     }
-    
+
     //http://jamesonquave.com/blog/developing-ios-apps-using-swift-tutorial-part-2/
-    func searchItunesFor(_ searchTerm: String) {
+    func searchItunesFor(searchTerm: String) {
         // The iTunes API wants multiple terms separated by + symbols, so replace spaces with + signs
         let itunesSearchTerm = searchTerm.replacingOccurrences(of: " ", with: "+", options: NSString.CompareOptions.caseInsensitive, range: nil)
         
         // Now escape anything else that isn't URL-friendly
-        if let escapedSearchTerm = itunesSearchTerm.addingPercentEscapes(using: String.Encoding.utf8) {
+        if let escapedSearchTerm = itunesSearchTerm.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlHostAllowed) {
             let urlPath = "http://itunes.apple.com/search?term=\(escapedSearchTerm)&media=software"
             let url = URL(string: urlPath)
             let session = URLSession.shared
@@ -116,20 +118,21 @@ class NewsFeedVC: UIViewController ,UITableViewDataSource ,UITableViewDelegate,M
                     print(error!.localizedDescription)
                 }
                 let err: NSError?
-                if let jsonResult = JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.mutableContainers) as? NSDictionary {
+                
+                if  let jsonResult = try JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.mutableContainers) as? NSDictionary {
                     if(err != nil) {
                         // If there is an error parsing JSON, print it to the console
                         print("JSON Error \(err!.localizedDescription)")
                     }
                     if let results: NSArray = jsonResult["results"] as? NSArray {
                         DispatchQueue.main.async(execute: {
-                            self.aryTableData = results as! [Any]
+                            self.aryTableData = results as! [Any] as! [String]
                             self.tblView!.reloadData()
                         })
                     }
                 }
             })
-            
+                
             // The task is just an object with all these properties set
             // In order to actually make the web request, we need to "resume"
             task.resume()
@@ -215,7 +218,7 @@ class NewsFeedVC: UIViewController ,UITableViewDataSource ,UITableViewDelegate,M
         if UIView.isKind(of: UITableViewHeaderFooterView.self)
         {
             let headerTitle = UITableViewHeaderFooterView()
-            headerTitle.textLabel!?.text = headerTitle.textLabel?.text?.lowercased()
+            headerTitle.textLabel!.text = headerTitle.textLabel?.text?.lowercased()
         }
     }
     

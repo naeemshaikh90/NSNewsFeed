@@ -2,8 +2,8 @@
 //  AppDelegate.swift
 //  NSNewsFeed
 //
-//  Created by Spaculus MM on 24/08/15.
-//  Copyright (c) 2015 Spaculus MM. All rights reserved.
+//  Created by Naeem Shaikh on 24/08/15.
+//  Copyright (c) 2015 Naeem Shaikh. All rights reserved.
 //
 
 import UIKit
@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var rootVC:NewsFeedVC?
     var detailVC:NewsFeedDetailsVC?
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    @objc func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
         rootVC = NewsFeedVC(nibName: "NewsFeedVC", bundle: Bundle.main)

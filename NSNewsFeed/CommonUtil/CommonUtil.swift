@@ -2,8 +2,8 @@
 //  CommonUtil.swift
 //  NSNewsFeed
 //
-//  Created by Spaculus MM on 26/08/15.
-//  Copyright (c) 2015 Spaculus MM. All rights reserved.
+//  Created by Naeem Shaikh on 26/08/15.
+//  Copyright (c) 2015 Naeem Shaikh. All rights reserved.
 //
 
 import UIKit
@@ -34,11 +34,11 @@ class CommonUtil: NSObject {
     }
     
     // MARK: - Show ALert
-    class func ShowALert(_ myTitle:String , myMessage message:String) {
+    class func ShowALert(myTitle:String , myMessage message:String) {
         let alert:Void = UIAlertView(title: myTitle, message: message, delegate: self, cancelButtonTitle: "OK").show()
     }
     
-    class func ShowALertWithDelegate(_ myTitle:String, myMessage message:String, myTarget target:UIAlertViewDelegate) {
+    class func ShowALertWithDelegate(myTitle:String, myMessage message:String, myTarget target:UIAlertViewDelegate) {
         let alert:Void = UIAlertView(title:myTitle, message:message, delegate:target, cancelButtonTitle: "YES", otherButtonTitles: "NO").show()
     }
    

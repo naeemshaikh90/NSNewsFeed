@@ -2,8 +2,8 @@
 //  NewsFeedDetailsVC.swift
 //  NSNewsFeed
 //
-//  Created by Spaculus MM on 26/08/15.
-//  Copyright (c) 2015 Spaculus MM. All rights reserved.
+//  Created by Naeem Shaikh on 26/08/15.
+//  Copyright (c) 2015 Naeem Shaikh. All rights reserved.
 //
 
 import UIKit
@@ -29,23 +29,22 @@ class NewsFeedDetailsVC: UIViewController {
     
     // MARK: - UItableViewMethods
     // MARK: - UITableView Delegates -
-    func numberOfSectionsInTableView(_ tableView: UITableView) -> Int {
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAtIndexPath indexPath: IndexPath) -> UITableViewCell {
-        let cell = self.tblView.dequeueReusableCell(withIdentifier: cellIdentifierCodingCell, for: indexPath) as! CodingCell
-        
-        
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "defaultCell")! as UITableViewCell
         
         return cell
     }
+    
     // MARK:  UITableView Height
-    func tableView(_ tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: IndexPath) -> CGFloat {
+    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: IndexPath) -> CGFloat {
         return 145
     }
 

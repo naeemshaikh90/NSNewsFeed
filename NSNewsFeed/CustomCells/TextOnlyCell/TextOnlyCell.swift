@@ -2,8 +2,8 @@
 //  TextOnlyCell.swift
 //  NSNewsFeed
 //
-//  Created by Spaculus MM on 24/08/15.
-//  Copyright (c) 2015 Spaculus MM. All rights reserved.
+//  Created by Naeem Shaikh on 24/08/15.
+//  Copyright (c) 2015 Naeem Shaikh. All rights reserved.
 //
 
 import UIKit
